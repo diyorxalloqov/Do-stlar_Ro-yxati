@@ -40,6 +40,7 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
     try {
       await _sqldbService.insertData(event.friendsCreate);
       emit(state.copyWith(status: ActionStatus.isSuccess));
+      add(FriendsGetEvent());
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }
@@ -51,6 +52,7 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
     try {
       await _sqldbService.updateData(event.taskmodelnew);
       emit(state.copyWith(status: ActionStatus.isSuccess));
+      add(FriendsGetEvent());
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }
@@ -62,6 +64,7 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
     try {
       await _sqldbService.deleteData(event.id);
       emit(state.copyWith(status: ActionStatus.isSuccess));
+      add(FriendsGetEvent());
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }

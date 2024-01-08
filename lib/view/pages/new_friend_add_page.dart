@@ -113,6 +113,7 @@ class _NewFriendsAddState extends State<NewFriendsAdd> {
               _ageController.clear();
               _descController.clear();
               _nameController.clear();
+              Navigator.pop(context);
             }
           },
           label: const Text('Saqlash')),
