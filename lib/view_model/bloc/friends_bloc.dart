@@ -38,8 +38,8 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
       FriendsCreateEvent event, Emitter<FriendsState> emit) async {
     emit(state.copyWith(status: ActionStatus.isLoading));
     try {
-      var response = await _sqldbService.insertData(event.friendsCreate);
-      emit(state.copyWith(status: ActionStatus.isSuccess, friends: response));
+      await _sqldbService.insertData(event.friendsCreate);
+      emit(state.copyWith(status: ActionStatus.isSuccess));
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }
@@ -49,8 +49,8 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
       FriendsUpdateEvent event, Emitter<FriendsState> emit) async {
     emit(state.copyWith(status: ActionStatus.isLoading));
     try {
-      var response = await _sqldbService.updateData(event.taskmodelnew);
-      emit(state.copyWith(status: ActionStatus.isSuccess, friends: response));
+      await _sqldbService.updateData(event.taskmodelnew);
+      emit(state.copyWith(status: ActionStatus.isSuccess));
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }
@@ -60,8 +60,8 @@ class FriendsBloc extends Bloc<FriendsEvent, FriendsState> {
       FriendsDeleteEvent event, Emitter<FriendsState> emit) async {
     emit(state.copyWith(status: ActionStatus.isLoading));
     try {
-      var response = await _sqldbService.deleteData(event.id);
-      emit(state.copyWith(status: ActionStatus.isSuccess, friends: response));
+      await _sqldbService.deleteData(event.id);
+      emit(state.copyWith(status: ActionStatus.isSuccess));
     } on DatabaseException catch (e) {
       emit(state.copyWith(status: ActionStatus.isError, error: e.toString()));
     }

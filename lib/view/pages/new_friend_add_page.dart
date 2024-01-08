@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:friends_list/model/friends_model.dart';
+import 'package:friends_list/view_model/bloc/friends_bloc.dart';
 
 class NewFriendsAdd extends StatefulWidget {
   const NewFriendsAdd({super.key});
@@ -79,8 +82,10 @@ class _NewFriendsAddState extends State<NewFriendsAdd> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: TextFormField(
                 controller: _descController,
+                maxLength: 50,
                 decoration: InputDecoration(
                     hintText: "description",
+                    counterText: '',
                     border: OutlineInputBorder(
                         borderSide:
                             const BorderSide(width: 1, color: Colors.white10),
@@ -100,7 +105,14 @@ class _NewFriendsAddState extends State<NewFriendsAdd> {
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             if (_key.currentState!.validate()) {
-              
+              context.read<FriendsBloc>().add(FriendsCreateEvent(
+                  friendsCreate: FriendsModel(
+                      name: _nameController.text,
+                      age: int.tryParse(_ageController.text),
+                      description: _descController.text)));
+              _ageController.clear();
+              _descController.clear();
+              _nameController.clear();
             }
           },
           label: const Text('Saqlash')),

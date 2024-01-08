@@ -25,7 +25,7 @@ class SqlDbService {
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     return openDatabase(join(documentsDirectory.path, 'task_database.data.db'),
-        version: 1, onCreate: _onCreate, onUpgrade: _onUpgrade);
+        version: 2, onCreate: _onCreate, onUpgrade: _onUpgrade);
   }
 
   _onCreate(Database db, int newVersion) async {
